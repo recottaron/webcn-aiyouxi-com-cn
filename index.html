@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱游戏 · 稳定入口与页面说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fce4b4 0%, #fcd6a0 30%, #fcc78c 70%, #fbb880 100%);
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.6;
+            color: #3e2e1e;
+        }
+
+        .page-wrapper {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* 主视觉卡片 – 暖色渐变 + 柔和光影 */
+        .hero-card {
+            background: #fffffffa;
+            backdrop-filter: blur(4px);
+            border-radius: 2.5rem;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 20px 40px -12px rgba(160, 100, 40, 0.25),
+                        0 8px 16px -6px rgba(100, 60, 20, 0.08);
+            margin-bottom: 2.2rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .hero-card h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: #4a2f18;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-card .subhead {
+            font-size: 1.2rem;
+            color: #7b5e3f;
+            border-left: 4px solid #e5b57a;
+            padding-left: 1rem;
+            margin: 0.8rem 0 1.2rem 0;
+            font-weight: 450;
+        }
+
+        .hero-card p {
+            font-size: 1rem;
+            color: #4d3b27;
+            max-width: 700px;
+        }
+
+        .hero-card p a {
+            color: #b26b2c;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px dashed #dba16e;
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        .hero-card p a:hover {
+            color: #8b4f1b;
+            border-bottom: 1px solid #b87a44;
+        }
+
+        /* 信息卡片网格 —— 用途 & 适合人群 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2.2rem;
+        }
+
+        .info-card {
+            background: #fffffffa;
+            border-radius: 2rem;
+            padding: 1.8rem 1.8rem 2rem 1.8rem;
+            box-shadow: 0 12px 28px -10px rgba(130, 80, 30, 0.15);
+            transition: transform 0.15s, box-shadow 0.2s;
+            backdrop-filter: blur(2px);
+        }
+
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 34px -12px rgba(140, 90, 40, 0.20);
+        }
+
+        .info-card h2 {
+            font-size: 1.5rem;
+            font-weight: 550;
+            color: #4f341d;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .info-card h2::before {
+            content: "· ·";
+            font-size: 1.2rem;
+            letter-spacing: 0.2em;
+            color: #dba16e;
+            margin-right: 0.3rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-card li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            margin-bottom: 0.7rem;
+            font-size: 0.95rem;
+            color: #4d3b27;
+        }
+
+        .info-card li::before {
+            content: "○";
+            color: #d28b50;
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .info-card p {
+            font-size: 0.95rem;
+            color: #4d3b27;
+        }
+
+        .info-card a {
+            color: #b26b2c;
+            font-weight: 450;
+            text-decoration: none;
+            border-bottom: 1px dotted #dba16e;
+        }
+
+        .info-card a:hover {
+            color: #8b4f1b;
+            border-bottom: 1px solid #b87a44;
+        }
+
+        /* 自然链接段落卡片 (FAQ / 使用提示) */
+        .link-paragraph-card {
+            background: #fffffffa;
+            border-radius: 2rem;
+            padding: 2rem 2rem 2.2rem 2rem;
+            box-shadow: 0 12px 28px -10px rgba(130, 80, 30, 0.15);
+            margin-bottom: 2.2rem;
+        }
+
+        .link-paragraph-card h2 {
+            font-size: 1.5rem;
+            font-weight: 550;
+            color: #4f341d;
+            margin-bottom: 1.2rem;
+        }
+
+        .link-paragraph-card h2::before {
+            content: "· ·";
+            font-size: 1.2rem;
+            letter-spacing: 0.2em;
+            color: #dba16e;
+            margin-right: 0.4rem;
+        }
+
+        .link-paragraph-card p {
+            font-size: 1rem;
+            color: #4d3b27;
+            margin-bottom: 0.9rem;
+        }
+
+        .link-paragraph-card a {
+            color: #b26b2c;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px dashed #dba16e;
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        .link-paragraph-card a:hover {
+            color: #8b4f1b;
+            border-bottom: 1px solid #b87a44;
+        }
+
+        .faq-item {
+            margin-top: 1.2rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid #efdbcb;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 550;
+            color: #4a2f18;
+            margin-bottom: 0.25rem;
+        }
+
+        /* 底部 */
+        .footer-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #7b5e3f;
+            opacity: 0.8;
+            padding: 1rem 0 0.5rem 0;
+            border-top: 1px solid #e8cfb8;
+            margin-top: 1rem;
+        }
+
+        .footer-note a {
+            color: #8b5b31;
+            text-decoration: none;
+            border-bottom: 1px dotted #c99b6b;
+        }
+
+        /* 响应式 */
+        @media (max-width: 720px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+
+            .hero-card {
+                padding: 1.8rem 1.2rem;
+                border-radius: 1.8rem;
+            }
+
+            .hero-card h1 {
+                font-size: 2rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .info-card {
+                padding: 1.5rem 1.2rem;
+                border-radius: 1.5rem;
+            }
+
+            .link-paragraph-card {
+                padding: 1.5rem 1.2rem;
+                border-radius: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-card h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-card .subhead {
+                font-size: 1rem;
+                padding-left: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+
+        <!-- 主视觉卡片 -->
+        <div class="hero-card">
+            <h1>爱游戏 · 稳定入口</h1>
+            <div class="subhead">页面说明与日常使用指引</div>
+            <p>
+                许多朋友习惯把 <a href="https://webcn-aiyouxi.com.cn">爱游戏</a> 当作一个安静的起点：没有弹窗干扰，页面结构清晰，适合反复访问。无论你是第一次过来，还是老朋友回来看看，这里都保持一致的浏览感受。
+            </p>
+            <p style="margin-top: 0.8rem;">
+                我们把核心功能放在最显眼的位置，避免多余跳转。打开就是内容本身，不用在菜单里翻找。
+            </p>
+        </div>
+
+        <!-- 双卡片：用途 + 适合人群 -->
+        <div class="card-grid">
+            <div class="info-card">
+                <h2>用途卡片</h2>
+                <ul>
+                    <li>快速定位游戏信息与版本动态</li>
+                    <li>查看日常更新与活动概览</li>
+                    <li>获取社区常见问题与解答摘要</li>
+                    <li>作为浏览器书签中常驻的稳定页面</li>
+                    <li>在移动端或桌面端均可顺畅浏览</li>
+                </ul>
+                <p style="margin-top: 0.8rem;">
+                    每次打开 <a href="https://webcn-aiyouxi.com.cn">爱游戏</a>，你都会看到最近一次访问时熟悉的入口布局，减少适应成本。
+                </p>
+            </div>
+
+            <div class="info-card">
+                <h2>适合人群</h2>
+                <ul>
+                    <li>偏爱简洁页面的日常玩家</li>
+                    <li>希望减少信息噪音、快速获取要点的用户</li>
+                    <li>习惯通过固定链接访问同一站点的朋友</li>
+                    <li>在多个设备间切换、需要统一体验的人</li>
+                    <li>对界面加载速度和稳定性有要求的使用者</li>
+                </ul>
+                <p style="margin-top: 0.8rem;">
+                    不论你属于哪一类，<a href="https://webcn-aiyouxi.com.cn">爱游戏</a> 都尝试提供一个不折腾的访问环境。
+                </p>
+            </div>
+        </div>
+
+        <!-- 自然链接段落卡片 (含 FAQ 摘要) -->
+        <div class="link-paragraph-card">
+            <h2>使用提示与常见疑问</h2>
+            <p>
+                进入 <a href="https://webcn-aiyouxi.com.cn">爱游戏</a> 后，首页按功能分区排列。左侧区域为近期焦点，中间部分为分类导航，右侧提供简要说明。如果你在寻找某个特定内容，可以直接使用页内关键词定位（Ctrl+F 或页面查找）。
+            </p>
+            <p>
+                页面没有强制注册或登录步骤，所有公开信息均可直接阅读。部分交互功能（如评论或收藏）需要简单的账号关联，具体可以在相关区域查看说明。
+            </p>
+
+            <div class="faq-item">
+                <strong>▸ 页面打不开或加载慢怎么办？</strong>
+                <p>先检查本地网络连接，或者尝试切换 Wi-Fi / 移动数据。如果仍然无法访问，可以稍后再试——<a href="https://webcn-aiyouxi.com.cn">爱游戏</a> 的服务器通常会在短时间内恢复稳定。</p>
+            </div>
+
+            <div class="faq-item">
+                <strong>▸ 移动端和电脑端显示有区别吗？</strong>
+                <p>核心内容与布局保持一致，只是移动端会稍微调整卡片间距和字体大小，方便手指操作。建议在手机浏览器中将 <a href="https://webcn-aiyouxi.com.cn">爱游戏</a> 添加至主屏幕，获得类似应用的使用感。</p>
+            </div>
+
+            <div class="faq-item">
+                <strong>▸ 如何获得最新动态？</strong>
+                <p>定期访问首页即可看到更新摘要。页面不会主动推送消息，适合不喜欢通知打扰的朋友。你只需记得这个稳定的入口就行。</p>
+            </div>
+        </div>
+
+        <!-- 底部 -->
+        <div class="footer-note">
+            <p>页面说明 · 保持简单 · <a href="https://webcn-aiyouxi.com.cn">爱游戏</a> 提供的是一种安静的访问方式</p>
+        </div>
+
+    </div>
+</body>
+</html>

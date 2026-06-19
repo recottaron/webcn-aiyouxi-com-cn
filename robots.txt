@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://recottaron.github.io/webcn-aiyouxi-com-cn/sitemap.xml
