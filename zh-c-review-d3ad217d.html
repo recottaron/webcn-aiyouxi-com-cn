@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>球探 · 日常查询与对照手册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f6fafc;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 1.2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wrapper {
+            max-width: 1120px;
+            margin: 0 auto;
+            flex: 1;
+        }
+
+        /* 蓝绿点缀色系统 */
+        :root {
+            --teal-50: #ecfdf5;
+            --teal-100: #d1fae5;
+            --teal-300: #6ee7b7;
+            --teal-500: #14b8a6;
+            --teal-700: #0f766e;
+            --teal-900: #134e4a;
+            --blue-50: #eff6ff;
+            --blue-200: #bfdbfe;
+            --blue-500: #3b82f6;
+            --slate-100: #f1f5f9;
+            --slate-300: #cbd5e1;
+        }
+
+        /* 网格卡片背景 */
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(20, 184, 166, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(20, 184, 166, 0.06) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+
+        /* hero 区 */
+        .hero {
+            padding: 2.4rem 0 1.8rem;
+            border-bottom: 2px solid var(--teal-100);
+            margin-bottom: 2.2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--teal-900);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .hero h1 span {
+            background: var(--teal-100);
+            color: var(--teal-700);
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.2rem 0.7rem;
+            border-radius: 40px;
+            line-height: 1.4;
+        }
+
+        .hero p {
+            max-width: 700px;
+            font-size: 1.05rem;
+            color: #334155;
+            margin-top: 0.75rem;
+            border-left: 4px solid var(--teal-500);
+            padding-left: 1rem;
+        }
+
+        /* 摘要/引语 */
+        .summary-block {
+            background: white;
+            border-radius: 24px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 6px 18px rgba(15, 118, 110, 0.06);
+            border: 1px solid var(--teal-100);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 1.2rem 2rem;
+        }
+
+        .summary-block .text {
+            flex: 2 1 260px;
+        }
+
+        .summary-block .badge-group {
+            flex: 1 1 140px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: flex-start;
+        }
+
+        .badge {
+            background: var(--blue-50);
+            border: 1px solid var(--blue-200);
+            color: #1e40af;
+            font-size: 0.8rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 100px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .badge.teal {
+            background: var(--teal-50);
+            border-color: var(--teal-300);
+            color: var(--teal-700);
+        }
+
+        /* 网格卡片布局 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.6rem;
+            margin: 2rem 0 2.8rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.6rem 1.4rem 1.8rem;
+            border: 1px solid var(--slate-100);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: all 0.15s ease;
+        }
+
+        .card:hover {
+            border-color: var(--teal-300);
+            box-shadow: 0 8px 20px rgba(20, 184, 166, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--teal-900);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .card h3 i {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--teal-500);
+            border-radius: 4px;
+            margin-right: 0.3rem;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #334155;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.6rem;
+        }
+
+        .card ul li {
+            padding: 0.2rem 0;
+            display: flex;
+            gap: 0.4rem;
+            align-items: baseline;
+        }
+
+        .card ul li::before {
+            content: "—";
+            color: var(--teal-500);
+            font-weight: 300;
+        }
+
+        .highlight-box {
+            background: var(--teal-50);
+            border-radius: 18px;
+            padding: 1.6rem 1.8rem;
+            border-left: 6px solid var(--teal-500);
+            margin: 1.6rem 0 2.2rem;
+        }
+
+        .highlight-box strong {
+            color: var(--teal-900);
+        }
+
+        .faq-mini {
+            background: white;
+            border-radius: 24px;
+            padding: 1.6rem 1.8rem;
+            margin: 2.2rem 0 2rem;
+            border: 1px solid var(--slate-300);
+        }
+
+        .faq-mini details {
+            margin: 0.5rem 0;
+            border-bottom: 1px dashed var(--slate-100);
+            padding: 0.6rem 0;
+        }
+
+        .faq-mini details:last-of-type {
+            border-bottom: none;
+        }
+
+        .faq-mini summary {
+            font-weight: 600;
+            cursor: pointer;
+            color: #0f3d3a;
+            padding: 0.2rem 0;
+            font-size: 0.98rem;
+        }
+
+        .faq-mini details[open] summary {
+            color: var(--teal-700);
+        }
+
+        .faq-mini details p {
+            margin-top: 0.5rem;
+            color: #475569;
+            font-size: 0.92rem;
+            padding-left: 0.4rem;
+        }
+
+        .visit-note {
+            background: white;
+            padding: 1.6rem 1.8rem;
+            border-radius: 24px;
+            border: 1px solid var(--slate-300);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.8rem;
+        }
+
+        .visit-note .text {
+            flex: 2 1 200px;
+        }
+
+        .visit-note .link-wrap {
+            flex: 0 0 auto;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            border: 2px solid var(--teal-500);
+            color: var(--teal-700);
+            background: transparent;
+            padding: 0.5rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: 0.15s;
+            white-space: nowrap;
+        }
+
+        .btn-outline:hover {
+            background: var(--teal-50);
+            border-color: var(--teal-700);
+            color: #0b4f4a;
+        }
+
+        footer {
+            margin-top: 3.5rem;
+            padding: 1.2rem 0 0.8rem;
+            border-top: 1px solid var(--slate-300);
+            font-size: 0.85rem;
+            color: #64748b;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 0.8rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .summary-block {
+                padding: 1.2rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .faq-mini {
+                padding: 1.2rem;
+            }
+
+            .visit-note {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .visit-note .link-wrap {
+                margin-top: 0.4rem;
+            }
+
+            .btn-outline {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+        }
+
+        /* 辅助 */
+        .mt-2 { margin-top: 1.2rem; }
+        .inline-link {
+            color: var(--teal-700);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1.5px;
+            text-decoration-color: var(--teal-300);
+            font-weight: 500;
+        }
+        .inline-link:hover {
+            color: #0b4f4a;
+            text-decoration-color: var(--teal-500);
+        }
+    </style>
+</head>
+<body class="grid-bg">
+    <div class="wrapper">
+        <!-- hero -->
+        <header class="hero">
+            <h1>
+                球探
+                <span>日常查询 · 对照 · 延伸</span>
+            </h1>
+            <p>
+                不是数据看板，而是一套可以随时翻查的参考手册。从联赛阵容到场外动态，
+                帮你把零散信息归拢到一处，适合赛前准备、赛后复盘或者单纯想多了解一点。
+            </p>
+        </header>
+
+        <!-- 摘要区块 -->
+        <section class="summary-block">
+            <div class="text">
+                <p style="font-weight: 500; color: #0f3d3a; margin-bottom: 0.3rem;">📖 它解决什么问题？</p>
+                <p>日常看球时常遇到：想确认某个球员近况却要翻好几个页面；记得一场比分但忘了具体轮次；想对比两队交锋记录但缺乏统一入口。<br>
+                <a href="https://zh-c-qiutan.com" class="inline-link">球探</a> 将这类分散需求整合为结构化的查询方式，减少跳转损耗。你可以把它看作一个长期维护的参考角，而非临时聚合页。</p>
+            </div>
+            <div class="badge-group">
+                <span class="badge teal">阵容对照</span>
+                <span class="badge">赛事日历</span>
+                <span class="badge teal">趋势备注</span>
+                <span class="badge">延伸阅读</span>
+            </div>
+        </section>
+
+        <!-- 特点网格 (亮点) -->
+        <div class="card-grid">
+            <div class="card">
+                <h3><i></i> 快速对照</h3>
+                <p>同一页面内并排展示两队基础数据与近期走势，无需反复切换标签。支持赛季、阶段等维度筛选。</p>
+                <ul>
+                    <li>阵容 & 伤停概览</li>
+                    <li>近五场赛果折叠</li>
+                    <li>历史交锋摘要</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3><i></i> 场景化索引</h3>
+                <p>按「赛前准备」「赛后复盘」「转会传闻核实」「青训动态」等场景组织内容，降低阅读负担。</p>
+                <ul>
+                    <li>每类场景自带说明卡片</li>
+                    <li>关键场次附带简短笔记</li>
+                    <li>外部引用标注来源</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3><i></i> 延伸阅读</h3>
+                <p>每支球队、每轮赛事下方均设「延伸」区域，汇总相关采访、战术分析或数据解读（非机器生成）。</p>
+                <ul>
+                    <li>人工挑选的优质外链</li>
+                    <li>附一句话推荐理由</li>
+                    <li>定期清理失效链接</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3><i></i> 克制更新</h3>
+                <p>不追求实时推送，而是每天固定时段同步一次数据。减少信息过载，保持页面干净。</p>
+                <ul>
+                    <li>每日 10:00 / 22:00 刷新</li>
+                    <li>变更部分高亮标记</li>
+                    <li>保留前一版快照</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 使用建议 + 小提示 -->
+        <div class="highlight-box">
+            <strong>💡 使用建议</strong><br>
+            如果你习惯在赛前打开 <a href="https://zh-c-qiutan.com" class="inline-link">球探</a> 快速过一遍双方近况，可以优先看「对照卡片」里的阵容变动与伤停栏；赛后想复盘则可以翻到「延伸阅读」部分，那里会收录赛后简报或战术短评。<br>
+            <span style="display: inline-block; margin-top: 0.5rem; background: white; padding: 0.2rem 0.6rem; border-radius: 30px; font-size: 0.85rem; color: var(--teal-700);">🕒 建议每周清理一次浏览器缓存，确保样式与数据同步</span>
+        </div>
+
+        <!-- FAQ 摘要 (不是全部, 只选三个典型) -->
+        <section class="faq-mini">
+            <h3 style="margin-bottom: 0.3rem; font-size: 1.1rem; color: var(--teal-900);">❓ 常见疑问摘要</h3>
+            <details>
+                <summary>数据来源可靠吗？</summary>
+                <p>主要基于联赛官方统计与公开报道，每个数值旁均标注了数据快照时间。转会、伤病信息会附注媒体原文标题，方便你二次核对。</p>
+            </details>
+            <details>
+                <summary>移动端查看体验如何？</summary>
+                <p>页面采用响应式网格与流式排版，在手机浏览器上卡片会自适应单列，按钮和链接间距也针对触控调整。建议横屏浏览对照表格以获得更宽视野。</p>
+            </details>
+            <details>
+                <summary>多久更新一次？</summary>
+                <p>常规内容每日两次同步（10:00 / 22:00），重大转会或突发事件会在确认后手动更新并标注「已核实」。页面右上角会显示最近一次同步时间。</p>
+            </details>
+        </section>
+
+        <!-- 可信但克制的访问说明 -->
+        <div class="visit-note">
+            <div class="text">
+                <p style="font-weight: 500; color: #0f3d3a;">🔍 直接使用，无需注册</p>
+                <p style="font-size: 0.92rem; margin-top: 0.2rem; color: #475569;">
+                    访问 <a href="https://zh-c-qiutan.com" class="inline-link">球探</a> 即进入查询界面，所有对照卡片、场景索引与延伸阅读均开放可见。
+                    没有付费墙，不要求登录，也不收集个人浏览行为。页面内包含少量外部引用链接，点击后会离开当前页面。
+                </p>
+            </div>
+            <div class="link-wrap">
+                <a href="https://zh-c-qiutan.com" class="btn-outline">球探</a>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <footer>
+            <span>内容持续整理 · 仅供参考</span>
+            <span>数据快照以页面标注时间为准</span>
+        </footer>
+    </div>
+</body>
+</html>
