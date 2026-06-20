@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>球探 · 简明指南与访问提醒</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f2f4f8;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1f2a3a;
+            line-height: 1.6;
+            padding: 2.5rem 1.2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* Hero 区 ———— 主视觉简洁 */
+        .hero {
+            background: #ffffff;
+            padding: 3rem 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 4px 14px rgba(0, 20, 30, 0.05), 0 1px 3px rgba(0,0,0,0.02);
+            border: 1px solid #e6eaef;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #17212b;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero .sub {
+            font-size: 1.2rem;
+            color: #516273;
+            max-width: 600px;
+            margin: 0.5rem auto 1.4rem;
+            font-weight: 350;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: #ecf1f7;
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            color: #2c3e50;
+            border: 1px solid #d6dee9;
+            letter-spacing: 0.01em;
+        }
+
+        /* 卡片通用设计 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin: 2.2rem 0;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem 1.8rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 3px 10px rgba(0, 10, 20, 0.03);
+            transition: box-shadow 0.15s ease, transform 0.1s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 20, 30, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .card h2 {
+            font-size: 1.35rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            border-left: 4px solid #8899b0;
+            padding-left: 0.8rem;
+            color: #1b2838;
+        }
+
+        .card p, .card li {
+            font-size: 1rem;
+            color: #2e405b;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding: 0.2rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .card li::before {
+            content: "·";
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #6e85a1;
+            position: absolute;
+            left: 0;
+            top: -0.2rem;
+        }
+
+        .col-span-2 {
+            grid-column: span 2;
+        }
+
+        /* 自然链接段落卡片 */
+        .link-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem 2.2rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.02);
+            margin: 1.2rem 0 2rem;
+        }
+
+        .link-card p {
+            font-size: 1.05rem;
+            color: #253544;
+        }
+
+        .link-card a {
+            color: #1f6390;
+            text-decoration: none;
+            font-weight: 480;
+            border-bottom: 1px solid #cbd8e8;
+            transition: border-color 0.15s, color 0.2s;
+        }
+
+        .link-card a:hover {
+            border-bottom-color: #1f6390;
+            color: #0f3d5e;
+        }
+
+        /* 附注 / 提醒卡片 */
+        .note-card {
+            background: #f8faff;
+            border-radius: 20px;
+            padding: 1.8rem 2rem;
+            border: 1px solid #dbe2ec;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .note-card h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #1e3349;
+            margin-bottom: 0.75rem;
+        }
+
+        .note-card p, .note-card li {
+            font-size: 0.98rem;
+            color: #3a4b62;
+        }
+
+        .note-card ul {
+            padding-left: 1.2rem;
+            margin: 0.5rem 0;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #dce3ed;
+            margin: 2rem 0 1rem;
+        }
+
+        .faq-mini {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.8rem 2rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .faq-mini h3 {
+            font-weight: 500;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #1d293b;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+
+        .faq-item strong {
+            font-weight: 550;
+            color: #1a344b;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-item p {
+            color: #2d405b;
+            margin-left: 0.6rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 680px) {
+            body {
+                padding: 1.5rem 0.8rem;
+            }
+
+            .hero {
+                padding: 2rem 1.2rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1.4rem;
+            }
+
+            .col-span-2 {
+                grid-column: span 1;
+            }
+
+            .card {
+                padding: 1.6rem 1.2rem;
+            }
+
+            .link-card {
+                padding: 1.6rem 1.2rem;
+            }
+
+            .faq-mini, .note-card {
+                padding: 1.4rem;
+            }
+        }
+
+        .footer-note {
+            margin-top: 3rem;
+            text-align: center;
+            color: #6e7d90;
+            font-size: 0.85rem;
+            border-top: 1px solid #d6dfea;
+            padding-top: 1.8rem;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- hero 主视觉 -->
+    <div class="hero">
+        <h1>球探 · 简明导航</h1>
+        <div class="sub">赛事信息聚合，观察节奏由你掌控</div>
+        <div class="tagline">⚽ 即时  ·  清晰  ·  实用</div>
+    </div>
+
+    <!-- 用途卡片 + 人群卡片 两列 -->
+    <div class="card-grid">
+        <div class="card">
+            <h2>常用场景</h2>
+            <ul>
+                <li>赛前快速浏览对阵与时间</li>
+                <li>比分追踪，不需要频繁刷新</li>
+                <li>多联赛数据参照，辅助判断</li>
+                <li>移动端轻量访问，随时可用</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2>适合谁用</h2>
+            <ul>
+                <li>日常关注联赛的球迷</li>
+                <li>习惯一边看比赛一边查数据</li>
+                <li>偏好简洁界面，不喜欢广告干扰</li>
+                <li>希望快速获得队伍近况的人</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 自然链接段落卡片 —— 温和说明+嵌入链接 -->
+    <div class="link-card">
+        <p>
+            如果你已经熟悉常见的体育数据站点，不妨试试 <a href="https://cn1-qiutan.com">球探</a> 的聚合方式。
+            页面布局偏重信息密度，适合在赛前几分钟扫一眼阵容和近五场战绩。
+            提醒：部分赛事数据更新可能存在延迟，建议结合官方渠道交叉确认。
+            无论你是长期看球的爱好者，还是偶尔关注热点对决，这个工具都能提供一份结构化的参考。
+        </p>
+    </div>
+
+    <!-- 访问提醒 + FAQ 摘要 两列布局 (实际为两卡片) -->
+    <div class="card-grid">
+        <div class="card note-card">
+            <h3>📌 访问提醒</h3>
+            <ul>
+                <li>站点无需注册即可浏览大部分内容</li>
+                <li>部分跳转页面可能包含第三方统计</li>
+                <li>建议使用现代浏览器 (Chrome / Edge / Safari)</li>
+                <li>如遇加载缓慢，可尝试刷新或稍后重试</li>
+            </ul>
+        </div>
+        <div class="card faq-mini">
+            <h3>❓ 常见疑问摘要</h3>
+            <div class="faq-item">
+                <strong>数据来源可靠吗？</strong>
+                <p>聚合自多家体育数据接口，仅供参考，不构成投注建议。</p>
+            </div>
+            <div class="faq-item">
+                <strong>移动端体验如何？</strong>
+                <p>页面适配手机屏幕，卡片式布局阅读较舒适。</p>
+            </div>
+            <div class="faq-item">
+                <strong>需要安装 App 吗？</strong>
+                <p>纯网页，不强制下载，浏览器直接使用。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 补充一段视角：从简明指南出发 -->
+    <div class="link-card" style="margin-top: 0.2rem;">
+        <p>
+            如果你是初次接触 <a href="https://cn1-qiutan.com">球探</a> ，建议先从热门联赛的赛程页开始浏览。
+            界面左侧通常陈列联赛列表，右侧展示具体对阵。
+            比分和红黄牌等关键事件会用图标标注，一目了然。
+            另外，历史交锋记录也整合在球队资料中，可以作为赛前快速查阅的切入点。
+            保持耐心，浏览几分钟就能熟悉它的信息结构。
+        </p>
+    </div>
+
+    <div class="footer-note">
+        内容仅供个人参考 · 请合理使用数据源 · 保持理性观赛
+    </div>
+</div>
+</body>
+</html>
